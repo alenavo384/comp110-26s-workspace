@@ -1,6 +1,6 @@
 """Wordle"""
 
-__author__: "730773822"
+__author__ = "730773822"
 
 
 def input_guess(secret_word_len: int) -> str:
