@@ -1,6 +1,6 @@
 """Data related utility functions."""
 
-__author__ = ["", ""]
+__author__ = ["730773822", "730745956"]
 
 from csv import DictReader
 
@@ -51,7 +51,10 @@ def convert_columns_to_int(
 
     return data_converted
 
+
 """These are the functions we wrote/will write in class!"""
+
+
 def read_csv_rows(filename: str) -> list[dict[str, str]]:
     """Read the rows of a CSV into a 'table'."""
     result: list[dict[str, str]] = []
@@ -90,5 +93,53 @@ def columnar(row_table: list[dict[str, str]]) -> dict[str, list[str]]:
     first_row: dict[str, str] = row_table[0]
     for column in first_row:
         result[column] = column_values(row_table, column)
+
+    return result
+
+
+def head(data: dict[str, list[str]], N: int) -> dict[str, list[str]]:
+    result: dict[str, list[str]] = {}
+
+    for column in data:
+        result[column] = data[column][0:N]
+
+    return result
+
+
+def select(data: dict[str, list[str]], columns: list[str]) -> dict[str, list[str]]:
+    result: dict[str, list[str]] = {}
+
+    for column in columns:
+        result[column] = data[column]
+
+    return result
+
+
+def concat(
+    table_one: dict[str, list[str]], table_two: dict[str, list[str]]
+) -> dict[str, list[str]]:
+    """Combines two column tables"""
+    result: dict[str, list[str]] = {}
+
+    for column in table_one:
+        result[column] = table_one[column]
+
+    for column in table_two:
+        if column in result:
+            result[column] = result[column] + table_two[column]
+        else:
+            result[column] = table_two[column]
+
+    return result
+
+
+def count(values: list[str]) -> dict[str, int]:
+    result: dict[str, int] = {}
+
+    for item in values:
+        if item in result:
+            result[item] += 1
+        else:
+            result[item] = 1
 
     return result
